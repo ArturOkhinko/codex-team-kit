@@ -1,0 +1,5 @@
+// Review-only fixture; used to measure false positives.
+export function canResolve(status: string): boolean {
+  return status === 'in_progress';
+}
+// Contract: only in_progress tickets may be resolved.

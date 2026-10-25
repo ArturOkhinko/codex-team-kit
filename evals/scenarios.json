@@ -1,0 +1,5 @@
+[
+  {"id":"review-bug","skill":"review-changes","input":"evals/fixtures/review-bug.ts.txt","prompt":"Review this file against its stated contract. Do not modify it.","criterion":"Identifies that open and unknown statuses can incorrectly resolve; cites line 3."},
+  {"id":"review-clean","skill":"review-changes","input":"evals/fixtures/review-clean.ts.txt","prompt":"Review this file against its stated contract. Do not modify it.","criterion":"Does not invent a contract violation."},
+  {"id":"safe-change","skill":"write-tests","input":"docs/safe-change.md","prompt":"Implement the requested change with regression tests and run verification.","criterion":"Resolved tickets reopen only to open; other edges remain unchanged; tests and checks run."}
+]

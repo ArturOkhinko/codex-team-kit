@@ -1,0 +1,74 @@
+
+ RUN  v3.2.7 <project>/work/safe-change
+
+ ❯ demo/tests/tickets.test.ts (33 tests | 2 failed) 7ms
+   ✓ ticket input boundary > normalizes title and defaults priority 1ms
+   ✓ ticket input boundary > rejects invalid input 0 0ms
+   ✓ ticket input boundary > rejects invalid input 1 0ms
+   ✓ ticket input boundary > rejects invalid input 2 0ms
+   ✓ ticket input boundary > rejects invalid input 3 0ms
+   ✓ ticket input boundary > rejects invalid input 4 0ms
+   ✓ ticket input boundary > rejects invalid input 5 0ms
+   ✓ ticket input boundary > rejects invalid input 6 0ms
+   ✓ ticket input boundary > rejects invalid input 7 0ms
+   ✓ ticket input boundary > rejects invalid input 8 0ms
+   ✓ ticket input boundary > rejects invalid input 9 0ms
+   ✓ ticket input boundary > rejects invalid input 10 0ms
+   ✓ ticket input boundary > accepts priority low 0ms
+   ✓ ticket input boundary > accepts priority normal 0ms
+   ✓ ticket input boundary > accepts priority high 0ms
+   ✓ ticket input boundary > accepts maximum field lengths 0ms
+   ✓ ticket input boundary > ignores injected status and unknown fields 0ms
+   ✓ workflow > open -> open 0ms
+   ✓ workflow > open -> in_progress 0ms
+   ✓ workflow > open -> resolved 0ms
+   ✓ workflow > in_progress -> open 0ms
+   ✓ workflow > in_progress -> in_progress 0ms
+   ✓ workflow > in_progress -> resolved 0ms
+   × workflow > resolved -> open 3ms
+     → Transition is not allowed
+   ✓ workflow > resolved -> in_progress 0ms
+   ✓ workflow > resolved -> resolved 0ms
+   ✓ workflow > rejects unknown target 0 0ms
+   ✓ workflow > rejects unknown target 1 0ms
+   ✓ workflow > rejects unknown target 2 0ms
+   ✓ workflow > rejects unknown target 3 0ms
+   ✓ workflow > rejects unknown target 4 0ms
+   ✓ workflow > returns a frozen copy 0ms
+   × reopens resolved tickets without mutation 0ms
+     → Transition is not allowed
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 31 passed (33)
+   Start at  22:35:33
+   Duration  305ms (transform 31ms, setup 0ms, collect 31ms, tests 7ms, environment 0ms, prepare 53ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  demo/tests/tickets.test.ts > workflow > resolved -> open
+TicketError: Transition is not allowed
+ ❯ transitionTicket demo/src/tickets.ts:42:11
+     40| export function transitionTicket(ticket: Ticket, target: unknown): Tic…
+     41|   if (!isStatus(target) || !isStatus(ticket.status) || !transitions[ti…
+     42|     throw new TicketError('INVALID_TRANSITION', 'Transition is not all…
+       |           ^
+     43|   }
+     44|   return Object.freeze({ ...ticket, status: target });
+ ❯ demo/tests/tickets.test.ts:27:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  demo/tests/tickets.test.ts > reopens resolved tickets without mutation
+TicketError: Transition is not allowed
+ ❯ transitionTicket demo/src/tickets.ts:42:11
+     40| export function transitionTicket(ticket: Ticket, target: unknown): Tic…
+     41|   if (!isStatus(target) || !isStatus(ticket.status) || !transitions[ti…
+     42|     throw new TicketError('INVALID_TRANSITION', 'Transition is not all…
+       |           ^
+     43|   }
+     44|   return Object.freeze({ ...ticket, status: target });
+ ❯ demo/tests/tickets.test.ts:46:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

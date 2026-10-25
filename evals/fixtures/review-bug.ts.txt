@@ -1,0 +1,5 @@
+// Review-only fixture. Deliberately wrong; never imported by the demo.
+export function canResolve(status: string): boolean {
+  return status !== 'resolved';
+}
+// Contract: only in_progress tickets may be resolved.

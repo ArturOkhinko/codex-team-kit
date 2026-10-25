@@ -1,0 +1,6 @@
+{
+  "kind": "isolated-safe-change-exercise",
+  "agentBenchmark": false,
+  "beforeExitCode": 1,
+  "afterExitCode": 0
+}
