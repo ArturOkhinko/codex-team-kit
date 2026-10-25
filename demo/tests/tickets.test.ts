@@ -23,7 +23,7 @@ describe('workflow', () => {
   for (const source of statuses) for (const target of statuses) {
     it(`${source} -> ${target}`, () => {
       const ticket = { ...fresh(), status: source };
-      const allowed = (source === 'open' && target === 'in_progress') || (source === 'in_progress' && (target === 'open' || target === 'resolved'));
+      const allowed = (source === 'open' && target === 'in_progress') || (source === 'in_progress' && (target === 'open' || target === 'resolved')) || (source === 'resolved' && target === 'open');
       if (allowed) expect(transitionTicket(ticket, target).status).toBe(target);
       else expect(() => transitionTicket(ticket, target)).toThrow(TicketError);
       expect(ticket.status).toBe(source);
@@ -38,5 +38,17 @@ describe('workflow', () => {
     expect(updated).not.toBe(ticket);
     expect(Object.isFrozen(updated)).toBe(true);
     expect(ticket.status).toBe('open');
+  });
+  it('reopens a resolved ticket as a new immutable ticket', () => {
+    const ticket = createTicket({ id: 'REOPEN-1', title: 'Recheck webhook', priority: 'high' });
+    const resolved = transitionTicket(transitionTicket(ticket, 'in_progress'), 'resolved');
+    const original = { ...resolved };
+
+    const reopened = transitionTicket(resolved, 'open');
+
+    expect(reopened).toEqual({ ...original, status: 'open' });
+    expect(reopened).not.toBe(resolved);
+    expect(Object.isFrozen(reopened)).toBe(true);
+    expect(resolved).toEqual(original);
   });
 });

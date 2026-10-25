@@ -13,7 +13,7 @@ export class TicketError extends Error {
   }
 }
 const transitions: Record<Status, readonly Status[]> = {
-  open: ['in_progress'], in_progress: ['open', 'resolved'], resolved: [],
+  open: ['in_progress'], in_progress: ['open', 'resolved'], resolved: ['open'],
 };
 function isStatus(value: unknown): value is Status {
   return value === 'open' || value === 'in_progress' || value === 'resolved';
