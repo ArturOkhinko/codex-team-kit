@@ -1,43 +1,31 @@
-# Verification evidence — 2026-10-25
+# Отчёт о проверках
 
-Environment: macOS arm64, Node.js 22.23.1, npm 12.2.0.
+Файл автоматически обновляется командой `npm run verify`. Не редактируйте его вручную.
 
-## Executed successfully
+- Начало запуска (UTC): 2026-10-26T01:39:10.705Z
+- Обновлён (UTC): 2026-10-26T01:39:14.346Z
+- Git-коммит: 8b7b84916eac4568279673a7205030a327af905d
+- Незакоммиченные изменения на старте: да. Сам этот отчёт исключён из проверки.
+- Среда: darwin/arm64, Node.js v22.23.1.
+- Результат: **Все проверки пройдены**.
 
-- `npm run verify`: exit 0. ESLint, TypeScript, 32 Vitest tests, build,
-  and 7 deterministic checks passed. See verification.log.
-- Safe-change exercise in an isolated copy: before exit 1 (regression demonstrated),
-  after exit 0. See regression-result.json and regression-before/after.log.
-  This demonstrates a test/fix cycle, not an independent agent benchmark.
-- Four SKILL.md frontmatters parsed using js-yaml and checked for matching names
-  and nonempty descriptions within 1024 characters.
-- `npm ci --dry-run --offline --ignore-scripts`: exit 0 after completing the lockfile.
-  This validates dependency-tree consistency; it is not a clean installation.
+## Команды и результаты
 
-## Limitations and failed attempts
+- `npm run lint` — Проверка ESLint: **успешно**; код 0; 904 мс.
+- `npm run typecheck` — Проверка типов: **успешно**; код 0; 807 мс.
+- `npm run test:report` — Тесты генератора отчёта: **успешно**; код 0; 233 мс.
+- `npm run test` — Тесты приложения: **успешно**; код 0; 868 мс.
+- `npm run build` — Сборка: **успешно**; код 0; 631 мс.
+- `npm run eval` — Детерминированные проверки: **успешно**; код 0; 158 мс.
 
-- npm registry DNS was unavailable. Normal npm install failed with ENOTFOUND.
-  Offline npm install could not find the cached package metadata (ENOTCACHED).
-- Dependencies were recovered from existing cached npm tarballs. The lockfile
-  records their actual versions and cached integrity hashes. Uncached optional
-  platform binaries use exact versions declared by their parent packages and
-  lack integrity hashes. Clean installation on Linux and GitHub CI have NOT
-  been executed. Verify them online before presenting the project as CI-proven.
-- The bundled Python skill validator could not run because PyYAML was absent.
-  YAML parsing and manifest checks above were used instead.
-- The sandbox refused writing `.agents/skills`. The sources exist in `skills/`;
-  run `node scripts/install-skills.mjs` from a user terminal to activate them.
-  The release ZIP also contains the intended `.agents/skills` layout.
-- No independent Codex CLI evaluation, security advisory scan, published PR,
-  or GitHub Actions run was performed. The suite does not quantify AI accuracy,
-  productivity improvement or time saved.
+## Тесты приложения
 
-## Review during implementation
+Всего: 32; прошли: 32; упали: 0; пропущены: 0.
 
-Input review identified that null priority silently received a default. The
-parser now defaults only when priority is absent, and rejects null with a
-regression test. Input validation, transition matrix and immutable updates were
-checked locally. This is implementation self-review, not independent review.
+## Область проверки
 
-Raw check output is included with local absolute project paths replaced by
-`<project>` for portability. No command outcomes have been edited.
+Это результаты указанных команд для состояния рабочей папки на момент запуска. При незакоммиченных изменениях одного хеша коммита недостаточно для воспроизведения.
+После первой ошибки последующие команды не запускаются. Если отчёт остался в состоянии «Выполняется», запуск не был завершён.
+Подробные ошибки выводятся в терминал. Отчёт не включает сырой вывод команд.
+Детерминированные проверки не являются AI-бенчмарком. Этот запуск не подтверждает статус GitHub CI, чистую установку зависимостей или отсутствие уязвимостей.
+Исторические результаты и ограничения первоначальной установки: [verification-initial.md](verification-initial.md).

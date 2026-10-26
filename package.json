@@ -1,1 +1,27 @@
-{"name":"codex-team-kit","version":"1.0.0","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"lint":"eslint demo","typecheck":"tsc --noEmit","test":"vitest run","build":"tsc -p tsconfig.build.json","demo":"npm run build && node dist/index.js","eval":"node scripts/evaluate.mjs","verify":"npm run lint && npm run typecheck && npm test && npm run build && npm run eval"},"devDependencies":{"@eslint/js":"^9.39.0","eslint":"^9.39.0","typescript":"~5.9.3","typescript-eslint":"^8.46.0","vitest":"^3.2.4"}}
+{
+  "name": "codex-team-kit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "eslint demo",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "demo": "npm run build && node dist/index.js",
+    "eval": "node scripts/evaluate.mjs",
+    "verify": "node scripts/verify.mjs",
+    "verify:report": "npm run verify",
+    "test:report": "node --test scripts/tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4"
+  }
+}
